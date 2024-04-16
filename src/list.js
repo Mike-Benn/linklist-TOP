@@ -1,4 +1,6 @@
 import { Node } from "./node";
+export { LinkedList };
+
 
 function LinkedList() {
     let head = null;
@@ -63,11 +65,17 @@ function LinkedList() {
     };
 
     const pop = () => {
-        let current = head;
-        while (current.getNext().getNext().getNext() !== null) {
-            current = current.getNext();
+        if (head === null || head.getNext() === null) {
+            head = null;
+        } else if (head.getNext().getNext() === null) {
+            head.setNext(null);
+        } else {
+            let current = head;
+            while (current.getNext().getNext().getNext() !== null) {
+                current = current.getNext();
+            }
+            current.getNext().setNext(null);
         }
-        current.getNext().setNext(null);
     };
 
     const contains = (value) => {
@@ -102,11 +110,12 @@ function LinkedList() {
 
     const toString = () => {
         if (head === null) {
-            console.log("null");
+            console.log("The list is empty!");
         } else {
             let current = head;
             while (current !== null) {
                 console.log(current.getValue());
+                current = current.getNext();
             }
         }
     }
