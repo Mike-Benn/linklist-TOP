@@ -15,18 +15,9 @@ function LinkedList() {
             head = node;
             tail = node;
             size = size + 1;
-        } else if (head.getNext() === null) {
-            head.setNext(node);
-            node.setLast(head);
-            tail = node;
-            size = size + 1;
         } else {
-            let current = head;
-            while (current.getNext() !== null) {
-                current = current.getNext();
-            }
-            current.setNext(node);
-            node.setLast(current);
+            tail.setNext(node);
+            node.setLast(tail);
             tail = node;
             size = size + 1;
         }
@@ -95,16 +86,18 @@ function LinkedList() {
 
     const remove = (key) => {
         if (head === null) {
-            console.log("Nothing was removed, key doesn't exist.");
+            return false;
         } else if (head.getNext() === null && head.getKey() === key) {
             head = null;
             tail = null;
             size = 0;
+            return true;
         } else if (head.getNext() === null && head.getKey() !== key) {
-            console.log("Nothing was removed, key doesn't exist.");
+            return false;
         } else if (head.getKey() === key && head.getNext() !== null) {
             head = head.getNext();
             size = size - 1;
+            return true;
         } else {
             let removed = false;
             let current = head;
@@ -126,9 +119,7 @@ function LinkedList() {
                 last = current;
                 current = current.getNext();
             }
-            if (removed === false) {
-                console.log("Nothing was removed, key doesn't exist.");
-            }
+            return removed;
         }
             
 
@@ -149,6 +140,7 @@ function LinkedList() {
 
     }
 
+    
 
     const find = (value) => {
         if (head === null) {
@@ -180,7 +172,7 @@ function LinkedList() {
             console.log(output);
         }
     }
-
+    
     return {
         append,
         prepend,

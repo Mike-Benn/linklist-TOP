@@ -11,6 +11,6 @@ list.toString();
 list.remove("square");
 console.log(list.getSize());
 list.toString();
-console.log(list.at(2).getLast().getKey());
-console.log(list.at(0).getNext().getKey());
+console.log(list.at(1).getLast().getKey());
+console.log(list.at(1).getNext().getKey());
 
